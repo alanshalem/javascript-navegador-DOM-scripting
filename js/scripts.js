@@ -85,3 +85,61 @@ window.onscroll = function () {
   console.log('scrolling...');
 };
 //------------------------------------------------------------//
+
+//------------------------------------------------------------//
+//SELECCIONAR UN ELEMENTO Y ASOCIARLE UN EVENTO
+const btnEnviar = document.querySelector('.boton--primario');
+
+btnEnviar.addEventListener('click', function (evento) {
+  evento.preventDefault();
+  console.log(evento);
+  console.log(evento.target);
+
+  //VALIDAR UN FORMULARIO
+  console.log('enviando formulario');
+});
+//------------------------------------------------------------//
+
+//------------------------------------------------------------//
+//EVENTOS DE LOS INPUTS Y TEXTAREA (EVENTOS CON EL TECLADO)
+const nombre = document.querySelector('#nombre');
+const email = document.querySelector('#email');
+const mensaje = document.querySelector('#mensaje');
+
+// nombre.addEventListener('change', function () {
+//   //change se ejecuta cuando hago click fuera del input
+//   console.log('escribiendo...');
+// });
+
+// nombre.addEventListener('input', function (e) {
+//   //input se ejecuta en tiempo real
+//   console.log('escribiendo en tiempo real...');
+//   //   console.log(e); //Se ejecuta letra por letra
+//   //   console.log(e.target); //Se ejecuta letra por letra, me devuelve el INPUT
+//   console.log(e.target.value); //Se ejecuta letra por letra, me devuelve el TEXTO
+// });
+
+// email.addEventListener('input', function (e) {
+//   console.log(e.target.value);
+// });
+
+// mensaje.addEventListener('input', function (e) {
+//   console.log(e.target.value);
+// });
+
+const datos = {
+  nombre: '',
+  email: '',
+  mensaje: '',
+};
+
+function leerTexto(e) {
+  //   console.log(e.target.value);
+  datos[e.target.id] = e.target.value;
+  console.log(datos);
+}
+
+nombre.addEventListener('input', leerTexto);
+email.addEventListener('input', leerTexto);
+mensaje.addEventListener('input', leerTexto);
+//------------------------------------------------------------//
