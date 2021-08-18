@@ -88,15 +88,35 @@ window.onscroll = function () {
 
 //------------------------------------------------------------//
 //SELECCIONAR UN ELEMENTO Y ASOCIARLE UN EVENTO
-const btnEnviar = document.querySelector('.boton--primario');
+// const btnEnviar = document.querySelector('.boton--primario');
 
-btnEnviar.addEventListener('click', function (evento) {
+// btnEnviar.addEventListener('click', function (evento) {
+//   evento.preventDefault();
+//   console.log(evento);
+//   console.log(evento.target);
+
+//   //VALIDAR UN FORMULARIO
+//   console.log('enviando formulario');
+// });
+
+//EL EVENTO DE SUBMIT
+const formulario = document.querySelector('.formulario');
+formulario.addEventListener('submit', function (evento) {
   evento.preventDefault();
-  console.log(evento);
-  console.log(evento.target);
 
-  //VALIDAR UN FORMULARIO
-  console.log('enviando formulario');
+  //VALIDAR FORMULARIO
+  const { nombre, email, mensaje } = datos;
+
+  if (nombre === '' || email === '' || mensaje === '') {
+    console.log('Todos los campos son obligatorios');
+    mostrarError('Todos los campos son obligatorios');
+    return; //CORTA LA EJECUCION DEL CODIGO
+  }
+
+  //Creo la alerta de enviar correctamente
+  mostrarMensaje('Mensaje enviado correctamente');
+
+  console.log('Enviando formulario');
 });
 //------------------------------------------------------------//
 
@@ -139,7 +159,55 @@ function leerTexto(e) {
   console.log(datos);
 }
 
+//Muestra una alerta
+function mostrarAlerta(mensaje, error = null) {
+  const alerta = document.createElement('P');
+  alerta.textContent = mensaje;
+
+  if (error) {
+    alerta.classList.add('error');
+  } else {
+    alerta.classList.add('correcto');
+  }
+
+  formulario.appendChild(alerta);
+
+  setTimeout(() => {
+    alerta.remove();
+  }, 5000);
+}
+
+//Muestra un error en pantalla
+function mostrarError(mensaje) {
+  const error = document.createElement('P');
+  error.textContent = mensaje;
+  error.classList.add('error');
+
+  formulario.appendChild(error);
+
+  //Desaparezca despues de 5 segundos
+  setTimeout(() => {
+    error.remove();
+  }, 5000);
+  console.log(error);
+}
+
+function mostrarMensaje(mensaje) {
+  const alerta = document.createElement('P');
+  alerta.textContent = mensaje;
+  alerta.classList.add('correcto');
+
+  formulario.appendChild(alerta);
+
+  //Desaparezca despues de 5 segundos
+  setTimeout(() => {
+    alerta.remove();
+  }, 5000);
+  console.log(alerta);
+}
+
 nombre.addEventListener('input', leerTexto);
 email.addEventListener('input', leerTexto);
 mensaje.addEventListener('input', leerTexto);
 //------------------------------------------------------------//
+//ORDEN: FORMUARIOS - EVENT LISTENERS - FUNCIONES
